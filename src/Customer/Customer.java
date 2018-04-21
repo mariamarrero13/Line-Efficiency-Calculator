@@ -33,8 +33,10 @@ public class Customer {
 		if (q < 0) return;   // only register positive value of q
 		remainingTime -= q; 
 	}
+	/*
+	 * Tells when the server finished attending the customer
+	 */
 	public boolean isServiceCompleted() {
 		return remainingTime==0;
 	}
-
 }
