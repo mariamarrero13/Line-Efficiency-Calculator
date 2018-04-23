@@ -12,11 +12,8 @@ public class SLMS {
 	private int numServers;  //number of Servers in the system
 	private ArrayList<Queue<Customer>> inputArray; // Array of Files 
 	private String name = "SLMS";
-	public SLMS (int numServers) {
-		this.numServers = numServers;
-	}
 
-	public String process(Queue<Customer> input) {
+	public String process(Queue<Customer> input, int numServers) {
 		Server[] servers = new Server[numServers];
 		Queue<Customer> inputQueue = input;
 		Deque<Customer> line = new ArrayDeque<>();

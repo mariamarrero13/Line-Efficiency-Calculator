@@ -13,10 +13,10 @@ import java.util.Queue;
 
 public class DataReader {
 
-	private static ArrayList<String> readFileNames() throws FileNotFoundException {
+	public static ArrayList<String> readFileNames() throws FileNotFoundException {
 		ArrayList<String> data = new ArrayList<String>();
 		String fileName = "dataFiles.txt"; 
-		Scanner inputFile = new Scanner(new File("src",fileName)); //TODO : change file name
+		Scanner inputFile = new Scanner(new File("inputFiles",fileName)); 
 		ArrayList<String> fileContent = new ArrayList<>(); 
 		while (inputFile.hasNext())
 			fileContent.add(inputFile.nextLine());
@@ -27,7 +27,7 @@ public class DataReader {
 		ArrayList<String> fileNames = readFileNames();
 		ArrayList<Queue<Customer>> files = new ArrayList<Queue<Customer>>();
 		for (String fileName : fileNames) {
-			Scanner inputFile = new Scanner(new File("src",fileName));
+			Scanner inputFile = new Scanner(new File("inputFiles",fileName));
 			ArrayList<String> fileContent = new ArrayList<>(); 
 			while (inputFile.hasNext())
 				fileContent.add(inputFile.nextLine());

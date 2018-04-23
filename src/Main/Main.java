@@ -1,6 +1,10 @@
 package Main;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Queue;
 
@@ -9,25 +13,34 @@ import DataReader.DataReader;
 import Lines.SLMS;
 
 public class Main {
-	public static void main(String args) {
+	public static void main(String[] args) throws UnsupportedEncodingException, FileNotFoundException {
 		ArrayList<Queue<Customer>> dataFiles = null;
+		ArrayList<String> fileNames = DataReader.readFileNames();
 		ArrayList<String> result = new ArrayList<String>() ;
 		try {
 			dataFiles = DataReader.readData();
+			int i=0;
+			for (Queue<Customer> file : dataFiles) {
+				SLMS slms = new SLMS();
+				result.add(slms.process(file,1)); //the file should be a clone
+				result.add(slms.process(file,3)); //the file should be a clone
+				result.add(slms.process(file,5)); //the file should be a clone
+
+				generateOutputFile(result , fileNames.get(i));
+				i++;
+			}
 		} catch (FileNotFoundException e) {
 			// write to output file : Input file not found.
 		}
-		
-		int numServer = 1;
-		while(numServer <6) {
-			for (Queue<Customer> file : dataFiles) {
-				SLMS slms = new SLMS(numServer);
-				result.add(slms.process(file)); //the file should be a clone
-			}
-			numServer+=2;
-		}
+
 	}
-	public void generateOutputFile(ArrayList<String> result) {
-		//TODO
+	public static void generateOutputFile(ArrayList<String> result , String fileName) throws FileNotFoundException, UnsupportedEncodingException {
+		int indexToTrim = 	fileName.lastIndexOf(".");
+		String fn = fileName.substring(0, indexToTrim-1);
+		PrintStream out = new PrintStream(new File("outputFiles", fn + ".txt"));
+		for (String s : result) {
+			out.println(s);
+		}
+		out.close();
 	}
 }
