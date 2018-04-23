@@ -26,16 +26,16 @@ public class SLMS {
 		for(int i = 0 ; i< numServers ; i++) {
 			emptyServers.add(new Server(i+1));
 		}
-			
-		
+
+
 		while(!inputQueue.isEmpty()||!line.isEmpty()||!(attendingCustomers ==0)){
 			System.out.println("Hey hey");	
-			
+
 			//Checks if a new customer arrives to the line and adds it
 			while(!inputQueue.isEmpty() && inputQueue.peek().getArrivalTime()==time)
 				line.add(inputQueue.remove());
 			System.out.println("1");
-			
+
 			//if there is a server available, assigns a new customer to it
 			while (attendingCustomers < numServers && !line.isEmpty()) {
 				Customer nc = line.remove();
