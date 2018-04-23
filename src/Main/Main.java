@@ -27,8 +27,8 @@ public class Main {
 				SLMS slms = new SLMS();
 
 				result.add(slms.process(clone(file),1)); //the file should be a clone
-//				result.add(slms.process(clone(file),3)); //the file should be a clone
-//				result.add(slms.process(clone(file),5)); //the file should be a clone
+				result.add(slms.process(clone(file),3)); //the file should be a clone
+				result.add(slms.process(clone(file),5)); //the file should be a clone
 
 				generateOutputFile(result , fileNames.get(i));
 				result.clear();
@@ -49,8 +49,13 @@ public class Main {
 		out.close();
 	}
 	private static Queue<Customer> clone(Queue<Customer> file) {
-		
-		Queue<Customer> copy = new ArrayDeque<Customer>(file);
-		return copy;		
+		Queue<Customer> copy = new ArrayDeque<>();
+		Iterator<Customer> iter = file.iterator();
+		while(iter.hasNext()) {
+			Customer c = iter.next();
+			Customer copyCust = new Customer(c.getCustid(),c.getArrivalTime(),c.getRemainingTime());
+			copy.add(copyCust);
+		}
+		return copy;
 	}
 }

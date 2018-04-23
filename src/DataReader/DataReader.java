@@ -33,9 +33,10 @@ public class DataReader {
 				fileContent.add(inputFile.nextLine());
 			inputFile.close();
 			Queue<Customer> cd = new ArrayDeque<>();
+			int i=0;
 			for (String s : fileContent){
-				String[] inputs = s.split(",");
-				Customer nc = new Customer(fileNames.indexOf(s), Integer.valueOf(inputs[0]), Integer.valueOf(inputs[1]));
+				String[] inputs = s.split(" ");
+				Customer nc = new Customer(i++, Integer.valueOf(inputs[0]), Integer.valueOf(inputs[1]));
 				cd.add(nc);
 			}
 			files.add(cd);
