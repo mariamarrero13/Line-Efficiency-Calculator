@@ -3,6 +3,7 @@ package Lines;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.Iterator;
 import java.util.Queue;
 
 import Customer.Customer;
@@ -14,46 +15,60 @@ public class SLMS {
 	private String name = "SLMS";
 
 	public String process(Queue<Customer> input, int numServers) {
-		Server[] servers = new Server[numServers];
 		Queue<Customer> inputQueue = input;
 		Deque<Customer> line = new ArrayDeque<>();
 		int attendingCustomers = 0 ; //number of customers being attended
 		ArrayList<Customer> attendedCustomers = new ArrayList<Customer>();	 //list of customers that servers finished attending
+		ArrayList<Server> busyServers = new ArrayList<Server>();	
 		ArrayList<Server> emptyServers = new ArrayList<Server>();			 //list of servers with no customers
 		int time = 0;
 		//initializes every server with an id from 1 to n
-		for(int i = 0 ; i< numServers ; i++)
-			servers[i] = new Server(i+1);
+		for(int i = 0 ; i< numServers ; i++) {
+			emptyServers.add(new Server(i+1));
+		}
+			
+		
 		while(!inputQueue.isEmpty()||!line.isEmpty()||!(attendingCustomers ==0)){
+			System.out.println("Hey hey");	
+			
+			//Checks if a new customer arrives to the line and adds it
+			while(!inputQueue.isEmpty() && inputQueue.peek().getArrivalTime()==time)
+				line.add(inputQueue.remove());
+			System.out.println("1");
+			
+			//if there is a server available, assigns a new customer to it
+			while (attendingCustomers < numServers && !line.isEmpty()) {
+				Customer nc = line.remove();
+				Server s = emptyServers.get(0);
+				s.setCustomer(nc);
+				nc.setAttendingTime(time);
+				emptyServers.remove(s);
+				busyServers.add(s);
+				attendingCustomers++;
+				System.out.println("2");
+			}
 			if(!(attendingCustomers==0)){
-				//if there is a server available, assigns a new customer to it
-				while (attendingCustomers< numServers) {
-					Customer nc = line.remove();
-					Server s = emptyServers.get(0);
-					s.setCustomer(nc);
-					nc.setAttendingTime(time);
-					emptyServers.remove(s);
-					attendingCustomers++;
-				}
+				Iterator<Server> iter = busyServers.iterator();
 				//Give service to every customer being attended
-				for (Server s : servers) {
+				while (iter.hasNext()) {
+					Server s = iter.next();
 					s.serve();
 					Customer actualCustomer = s.getCustomer();
-					System.out.println("Hola");
 					//Checks if server finished with customer 
 					if(actualCustomer.isServiceCompleted()) { 
 						attendedCustomers.add(actualCustomer);  
 						attendingCustomers--;
-						emptyServers.add(s);  
+						iter.remove();
+						emptyServers.add(s); 
+						System.out.println("4");
 					}
 				}
 			}
-			//Checks if a new customer arrives to the line and adds it
-			while(!inputQueue.isEmpty() && inputQueue.peek().getArrivalTime()==time)
-				line.add(inputQueue.remove());
+			System.out.println(time);
 			time++;
 		}
 		//compute final statistics
+		System.out.println("SLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0");
 		return "SLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
 	}
 	/**
