@@ -16,7 +16,7 @@ public class DataReader {
 	private static ArrayList<String> readFileNames() throws FileNotFoundException {
 		ArrayList<String> data = new ArrayList<String>();
 		String fileName = "dataFiles.txt"; 
-		Scanner inputFile = new Scanner(new File("src",fileName)); 
+		Scanner inputFile = new Scanner(new File("src",fileName)); //TODO : change file name
 		ArrayList<String> fileContent = new ArrayList<>(); 
 		while (inputFile.hasNext())
 			fileContent.add(inputFile.nextLine());

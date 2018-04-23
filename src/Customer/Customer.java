@@ -5,7 +5,7 @@ public class Customer {
 	private int serverid; 	   // id of the line the customer is
 	private int arrivalTime;    // arrival time of this customer
 	private int remainingTime;  // remaining service time for this customer
-	private int departureTime;
+	private int attendingTime;
 	public Customer (int id, int at, int rt) { 
 		custid = id; 
 		arrivalTime = at; 
@@ -26,11 +26,11 @@ public class Customer {
 	public int getRemainingTime() {
 		return remainingTime;
 	}
-	public void setDepartureTime(int departureTime) {
-		this.departureTime = departureTime;
+	public void setAttendingTime(int attendingTime) {
+		this.attendingTime = attendingTime;
 	}
-	public int getDepartureTime() {
-		return departureTime;
+	public int getAttendingTime() {
+		return attendingTime;
 	}
 	/**
 	 * Registers an update of serviced received by this customer. 

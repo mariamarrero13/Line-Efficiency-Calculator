@@ -13,9 +13,9 @@ public class SLMS {
 	private ArrayList<Queue<Customer>> inputArray; // Array of Files 
 	public SLMS (int numServers) {
 		this.numServers = numServers;
-		this.inputArray = inputArray;
 	}
 	public void processFiles(ArrayList<Queue<Customer>> inputArray){
+		this.inputArray = inputArray;
 		for (Queue<Customer> dc : inputArray) {
 			serve(dc,numServers);
 		}
@@ -27,22 +27,23 @@ public class SLMS {
 		Server[] servers = new Server[numServers];
 		Queue<Customer> inputQueue = input;
 		Deque<Customer> line = new ArrayDeque<>();
-		ArrayList<Customer> attendingCustomers = new ArrayList<Customer>();  //list of customers being attended
+		int attendingCustomers = 0 ; //number of customers being attended
 		ArrayList<Customer> attendedCustomers = new ArrayList<Customer>();	 //list of customers that servers finished attending
 		ArrayList<Server> emptyServers = new ArrayList<Server>();			 //list of servers with no customers
 		int time = 0;
 		//initializes every server with an id from 1 to n
 		for(int i = 0 ; i< numServers ; i++)
 			servers[i] = new Server(i+1);
-		while(!inputQueue.isEmpty()||!line.isEmpty()||!attendingCustomers.isEmpty()){
-			if(!attendingCustomers.isEmpty()){
+		while(!inputQueue.isEmpty()||!line.isEmpty()||!(attendingCustomers ==0)){
+			if(!(attendingCustomers==0)){
 				//if there is a server available, assigns a new customer to it
-				while (attendingCustomers.size()< numServers) {
+				while (attendingCustomers< numServers) {
 					Customer nc = line.getFirst();
 					Server s = emptyServers.get(0);
 					s.setCustomer(nc);
+					nc.setAttendingTime(time);
 					emptyServers.remove(s);
-					attendingCustomers.add(nc);
+					attendingCustomers++;
 				}
 				//Give service to every customer being attended
 				for (Server s : servers) {
@@ -50,9 +51,8 @@ public class SLMS {
 					Customer actualCustomer = s.getCustomer();
 					//Checks if server finished with customer 
 					if(actualCustomer.isServiceCompleted()) { 
-						actualCustomer.setDepartureTime(time);
 						attendedCustomers.add(actualCustomer);  
-						attendingCustomers.remove(actualCustomer); 
+						attendingCustomers--;
 						emptyServers.add(s);  
 					}
 				}
@@ -62,6 +62,7 @@ public class SLMS {
 				line.add(inputQueue.remove());
 			time++;
 		}
+		// TODO: compute final statistics
 	}
 	/**
 	 * Calculates the average time the customer waits to finish being attended 
@@ -72,7 +73,7 @@ public class SLMS {
 	private static double averageTime(ArrayList<Customer>  attendedCustomers){
 		double avg = 0;
 		for(Customer j : attendedCustomers){
-			avg += j.getDepartureTime()-j.getArrivalTime();
+			avg += j.getAttendingTime()-j.getArrivalTime();
 		}
 		avg = avg/attendedCustomers.size();
 		return avg;
