@@ -11,7 +11,7 @@ import java.util.Deque;
 
 public class DataReader {
 
-	private static ArrayList<String> readFileNames() throws FileNotFoundException {
+	private static ArrayList<String> readData() throws FileNotFoundException {
 		ArrayList<String> data = new ArrayList<String>();
 		String fileName = "dataFiles.txt"; 
 		Scanner inputFile = new Scanner(new File("src",fileName)); 
@@ -21,23 +21,15 @@ public class DataReader {
 		inputFile.close();
 		return fileContent; 
 	}
-	private static ArrayList<Deque> readData() throws FileNotFoundException{
-		ArrayList<String> fileNames = readFileNames();
-		ArrayList<Deque> files = new ArrayList<Deque>();
-		for (String fileName : fileNames) {
-			Scanner inputFile = new Scanner(new File("src",fileName));
-			ArrayList<String> fileContent = new ArrayList<>(); 
-			while (inputFile.hasNext())
-				fileContent.add(inputFile.nextLine());
-			inputFile.close();
-			Deque<Customer> cd = new ArrayDeque<>();
-			for (String s : fileContent){
-				String[] inputs = s.split(",");
-				Customer nc = new Customer(fileNames.indexOf(s), Integer.valueOf(inputs[0]), Integer.valueOf(inputs[1]));
-				cd.add(nc);
-			}
-			files.add(cd);
+	private static Deque<Customer> arraytoQueue(ArrayList<String> data) {
+		Deque<Customer> inputDeque = new ArrayDeque<Customer>();
+		for (String s : data){
+			String[] inputs = s.split(",");
+			Customer nc = new Customer(data.indexOf(s), Integer.valueOf(inputs[0]), Integer.valueOf(inputs[1]));
+			inputDeque.add(nc);
 		}
-		return files;
+
+		return inputDeque;
 	}
+	
 }

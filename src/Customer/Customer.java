@@ -5,6 +5,7 @@ public class Customer {
 	private int serverid; 	   // id of the line the customer is
 	private int arrivalTime;    // arrival time of this customer
 	private int remainingTime;  // remaining service time for this customer
+	private int departureTime;
 	public Customer (int id, int at, int rt) { 
 		custid = id; 
 		arrivalTime = at; 
@@ -25,6 +26,12 @@ public class Customer {
 	public int getRemainingTime() {
 		return remainingTime;
 	}
+	public void setDepartureTime(int departureTime) {
+		this.departureTime = departureTime;
+	}
+	public int getDepartureTime() {
+		return departureTime;
+	}
 	/**
 	 * Registers an update of serviced received by this customer. 
 	 * @param q the time of the service being registered. 
@@ -33,10 +40,8 @@ public class Customer {
 		if (q < 0) return;   // only register positive value of q
 		remainingTime -= q; 
 	}
-	/*
-	 * Tells when the server finished attending the customer
-	 */
 	public boolean isServiceCompleted() {
 		return remainingTime==0;
 	}
+
 }
