@@ -28,7 +28,7 @@ public class SLMS {
 			if(!(attendingCustomers==0)){
 				//if there is a server available, assigns a new customer to it
 				while (attendingCustomers< numServers) {
-					Customer nc = line.getFirst();
+					Customer nc = line.remove();
 					Server s = emptyServers.get(0);
 					s.setCustomer(nc);
 					nc.setAttendingTime(time);
