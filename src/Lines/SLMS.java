@@ -11,19 +11,12 @@ import Server.Server;
 public class SLMS {
 	private int numServers;  //number of Servers in the system
 	private ArrayList<Queue<Customer>> inputArray; // Array of Files 
+	private String name = "SLMS";
 	public SLMS (int numServers) {
 		this.numServers = numServers;
 	}
-	public void processFiles(ArrayList<Queue<Customer>> inputArray){
-		this.inputArray = inputArray;
-		for (Queue<Customer> dc : inputArray) {
-			serve(dc,numServers);
-		}
-		//this is supposed to produce an output time for each file (still working)
-	}
 
-
-	public void serve(Queue<Customer> input, int numServers) {
+	public String process(Queue<Customer> input) {
 		Server[] servers = new Server[numServers];
 		Queue<Customer> inputQueue = input;
 		Deque<Customer> line = new ArrayDeque<>();
@@ -62,7 +55,8 @@ public class SLMS {
 				line.add(inputQueue.remove());
 			time++;
 		}
-		// TODO: compute final statistics
+		//compute final statistics
+		return "SLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
 	}
 	/**
 	 * Calculates the average time the customer waits to finish being attended 
