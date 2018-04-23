@@ -39,6 +39,7 @@ public class SLMS {
 				for (Server s : servers) {
 					s.serve();
 					Customer actualCustomer = s.getCustomer();
+					System.out.println("Hola");
 					//Checks if server finished with customer 
 					if(actualCustomer.isServiceCompleted()) { 
 						attendedCustomers.add(actualCustomer);  
