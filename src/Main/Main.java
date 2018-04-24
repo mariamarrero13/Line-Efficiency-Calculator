@@ -13,7 +13,7 @@ import java.util.Queue;
 
 import Customer.Customer;
 import DataReader.DataReader;
-import Lines.SLMS;
+import LineSystem.SLMS;
 
 public class Main {
 	public static void main(String[] args) throws UnsupportedEncodingException, FileNotFoundException {
