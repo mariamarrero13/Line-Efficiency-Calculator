@@ -1,5 +1,5 @@
-package LineSystem;
+package Lines;
 
 public class MLMS {
-	
+
 }

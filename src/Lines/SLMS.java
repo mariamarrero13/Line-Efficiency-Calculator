@@ -1,4 +1,4 @@
-package LineSystem;
+package Lines;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -10,10 +10,6 @@ import Customer.Customer;
 import Server.Server;
 
 public class SLMS {
-	private int numServers;  //number of Servers in the system
-	private ArrayList<Queue<Customer>> inputArray; // Array of Files 
-	private String name = "SLMS";
-
 	public String process(Queue<Customer> input, int numServers) {
 		Queue<Customer> inputQueue = input;
 		Deque<Customer> line = new ArrayDeque<>();
@@ -26,16 +22,14 @@ public class SLMS {
 		for(int i = 0 ; i< numServers ; i++) {
 			emptyServers.add(new Server(i+1));
 		}
-
-
+			
+		
 		while(!inputQueue.isEmpty()||!line.isEmpty()||!(attendingCustomers ==0)){
-			System.out.println("Hey hey");	
-
+			
 			//Checks if a new customer arrives to the line and adds it
 			while(!inputQueue.isEmpty() && inputQueue.peek().getArrivalTime()==time)
 				line.add(inputQueue.remove());
-			System.out.println("1");
-
+			
 			//if there is a server available, assigns a new customer to it
 			while (attendingCustomers < numServers && !line.isEmpty()) {
 				Customer nc = line.remove();
@@ -45,7 +39,6 @@ public class SLMS {
 				emptyServers.remove(s);
 				busyServers.add(s);
 				attendingCustomers++;
-				System.out.println("2");
 			}
 			if(!(attendingCustomers==0)){
 				Iterator<Server> iter = busyServers.iterator();
@@ -60,7 +53,6 @@ public class SLMS {
 						attendingCustomers--;
 						iter.remove();
 						emptyServers.add(s); 
-						System.out.println("4");
 					}
 				}
 			}
@@ -68,7 +60,6 @@ public class SLMS {
 			time++;
 		}
 		//compute final statistics
-		System.out.println("SLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0");
 		return "SLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
 	}
 	/**

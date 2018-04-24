@@ -3,17 +3,15 @@ package Main;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Queue;
 
 import Customer.Customer;
 import DataReader.DataReader;
-import LineSystem.SLMS;
+import Lines.SLMS;
 
 public class Main {
 	public static void main(String[] args) throws UnsupportedEncodingException, FileNotFoundException {
@@ -26,9 +24,9 @@ public class Main {
 			for (Queue<Customer> file : dataFiles) {
 				SLMS slms = new SLMS();
 
-				result.add(slms.process(clone(file),1)); //the file should be a clone
-				result.add(slms.process(clone(file),3)); //the file should be a clone
-				result.add(slms.process(clone(file),5)); //the file should be a clone
+				result.add(slms.process(clone(file),1)); 
+				result.add(slms.process(clone(file),3)); 
+				result.add(slms.process(clone(file),5)); 
 
 				generateOutputFile(result , fileNames.get(i));
 				result.clear();
