@@ -9,7 +9,7 @@ import java.util.Queue;
 import Customer.Customer;
 import Server.Server;
 
-public class SLMS {
+public class SLMS implements Line{
 	public String process(Queue<Customer> input, int numServers) {
 		Queue<Customer> inputQueue = input;
 		Deque<Customer> line = new ArrayDeque<>();
@@ -68,7 +68,7 @@ public class SLMS {
 	 * @param attendedCustomers
 	 * @return average time 
 	 */
-	private static double averageTime(ArrayList<Customer>  attendedCustomers){
+	protected static double averageTime(ArrayList<Customer>  attendedCustomers){
 		double avg = 0;
 		for(Customer j : attendedCustomers){
 			avg += j.getAttendingTime()-j.getArrivalTime();
