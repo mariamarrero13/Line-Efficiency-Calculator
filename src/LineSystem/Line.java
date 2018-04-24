@@ -1,4 +1,4 @@
-package Interfaces;
+package LineSystem;
 
 public interface Line {
 
