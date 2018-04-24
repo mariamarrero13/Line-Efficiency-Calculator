@@ -56,7 +56,6 @@ public class SLMS implements Line{
 					}
 				}
 			}
-			System.out.println(time);
 			time++;
 		}
 		//compute final statistics
