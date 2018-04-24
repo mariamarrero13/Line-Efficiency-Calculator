@@ -33,7 +33,7 @@ public class MLMS extends SLMS {
 				//calculate which line is emptier and deposit the customer in it
 				int min = findMin(line);
 				line.get(min).add(inputQueue.remove());
-				}
+			}
 			//if there is a server available, assigns a new customer to it
 			int i = 0;
 			while (!isEmpty(line) && serverHasLine(emptyServers, line) ) {
@@ -71,11 +71,11 @@ public class MLMS extends SLMS {
 		//compute final statistics
 		return "MLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
 	}
-/**
- * Finds the index of the line that has less customers
- * @param line the arraylist of queues to search in
- * @return the index of the line
- */
+	/**
+	 * Finds the index of the line that has less customers
+	 * @param line the arraylist of queues to search in
+	 * @return the index of the line
+	 */
 	public static int findMin(ArrayList<Deque<Customer>> line) {
 		int minIndex;
 		if (line.isEmpty()) {
@@ -94,11 +94,11 @@ public class MLMS extends SLMS {
 		}
 		return minIndex;
 	}
-/**
- * Verifies if every queue in the arraylist is empty
- * @param line
- * @return
- */
+	/**
+	 * Verifies if every queue in the arraylist is empty
+	 * @param line
+	 * @return
+	 */
 	public static boolean isEmpty(ArrayList<Deque<Customer>> line) {
 		for(Deque<Customer> dq : line) {
 			if(!dq.isEmpty()) return false;
