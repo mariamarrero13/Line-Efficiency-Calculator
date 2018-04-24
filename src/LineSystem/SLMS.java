@@ -73,6 +73,6 @@ public class SLMS implements Line{
 			avg += j.getAttendingTime()-j.getArrivalTime();
 		}
 		avg = avg/attendedCustomers.size();
-		return avg;
+		return  Math.round(avg * 100.0) / 100.0;
 	}
 }

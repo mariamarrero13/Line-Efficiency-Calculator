@@ -32,16 +32,13 @@ public class MLMS extends SLMS {
 			while(!inputQueue.isEmpty() && inputQueue.peek().getArrivalTime()==time) {
 				//calculate which line is emptier and deposit the customer in it
 				int min = findMin(line);
-				System.out.println( "Add to:" + min );
-				line.get(min).add(inputQueue.remove());}
-
+				line.get(min).add(inputQueue.remove());
+				}
 			//if there is a server available, assigns a new customer to it
 			int i = 0;
 			while (!isEmpty(line) && serverHasLine(emptyServers, line) ) {
 				Server s = emptyServers.get(i);
-				System.out.println("Remove from :"+ (s.getServerid()-1));
 				if(!line.get(s.getServerid()-1).isEmpty()) {
-					System.out.println("Remove from :"+ (s.getServerid()-1));
 					Customer nc = line.get(s.getServerid()-1).remove();
 					s.setCustomer(nc);
 					nc.setAttendingTime(time);
@@ -72,7 +69,7 @@ public class MLMS extends SLMS {
 			time++;
 		}
 		//compute final statistics
-		return "SLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
+		return "MLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
 	}
 /**
  * Finds the index of the line that has less customers

@@ -23,6 +23,7 @@ public class Main {
 			dataFiles = DataReader.readData();
 			int i=0;
 			for (Queue<Customer> file : dataFiles) {
+				result.add("Number of customers is: " + file.size());
 				SLMS slms = new SLMS();
 				MLMS mlms = new MLMS();
 
