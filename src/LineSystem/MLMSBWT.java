@@ -1,4 +1,4 @@
-package Lines;
+package LineSystem;
 
 public class MLMSBWT {
 
