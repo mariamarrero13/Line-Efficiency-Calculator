@@ -76,7 +76,7 @@ public class MLMS extends SLMS {
 	 * @param line the arraylist of queues to search in
 	 * @return the index of the line
 	 */
-	public static int findMin(ArrayList<Deque<Customer>> line) {
+	protected static int findMin(ArrayList<Deque<Customer>> line) {
 		int minIndex;
 		if (line.isEmpty()) {
 			minIndex = -1;
@@ -99,7 +99,7 @@ public class MLMS extends SLMS {
 	 * @param line
 	 * @return
 	 */
-	public static boolean isEmpty(ArrayList<Deque<Customer>> line) {
+	protected static boolean isEmpty(ArrayList<Deque<Customer>> line) {
 		for(Deque<Customer> dq : line) {
 			if(!dq.isEmpty()) return false;
 		}
@@ -111,7 +111,7 @@ public class MLMS extends SLMS {
 	 * @param line
 	 * @return
 	 */
-	private boolean serverHasLine(ArrayList<Server> emptyServers, ArrayList<Deque<Customer>> line) {
+	protected boolean serverHasLine(ArrayList<Server> emptyServers, ArrayList<Deque<Customer>> line) {
 		for(Server s: emptyServers) {
 			if(!(line.get(s.getServerid()-1).isEmpty())){
 				return true;
@@ -119,5 +119,4 @@ public class MLMS extends SLMS {
 		}
 		return false;
 	}
-
 }

@@ -7,5 +7,8 @@ import Customer.Customer;
 
 public interface Line {
 	
-String process(Queue<Customer> input, int numServers);
+	String process(Queue<Customer> input, int numServers);
+	/*
+	 * 
+	 */
 }
