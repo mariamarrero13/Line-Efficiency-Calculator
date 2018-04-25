@@ -23,5 +23,8 @@ public class Server {
 	public void serve () {
 		cust.isServed(1);
 	}
+	public void serve (int time) {
+		cust.isServed(1);
+	}
 
 }

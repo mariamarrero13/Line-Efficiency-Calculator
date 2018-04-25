@@ -9,7 +9,7 @@ import java.util.Queue;
 import Customer.Customer;
 import Server.Server;
 
-public class SLMS implements Line{
+public class SLMS implements Line{	
 	public String process(Queue<Customer> input, int numServers) {
 		Queue<Customer> inputQueue = input;
 		Deque<Customer> line = new ArrayDeque<>();
@@ -18,6 +18,7 @@ public class SLMS implements Line{
 		ArrayList<Server> busyServers = new ArrayList<Server>();	
 		ArrayList<Server> emptyServers = new ArrayList<Server>();			 //list of servers with no customers
 		int time = 0;
+		int lastTime = -2;
 		//initializes every server with an id from 1 to n
 		for(int i = 0 ; i< numServers ; i++) {
 			emptyServers.add(new Server(i+1));
@@ -45,7 +46,7 @@ public class SLMS implements Line{
 				//Give service to every customer being attended
 				while (iter.hasNext()) {
 					Server s = iter.next();
-					s.serve();
+					s.serve(time -lastTime +1);
 					Customer actualCustomer = s.getCustomer();
 					//Checks if server finished with customer 
 					if(actualCustomer.isServiceCompleted()) { 
@@ -56,10 +57,32 @@ public class SLMS implements Line{
 					}
 				}
 			}
+			lastTime = time;
+			//time = serviceTime(time , busyServers, inputQueue);
 			time++;
+			System.out.println("Actual time: " +time);
 		}
 		//compute final statistics
 		return "SLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
+	}
+	protected int serviceTime(int time, ArrayList<Server> busyServers, Queue<Customer> inputQueue) {
+		Integer curr= new Integer(0);
+		Integer min = time + 1;
+		if (busyServers.size()!=0) {
+			min = busyServers.get(0).getCustomer().getRemainingTime();
+			for (Server s : busyServers) {
+				curr = s.getCustomer().getRemainingTime();
+				if (curr.compareTo(min) < 0) 
+					min = curr;
+			}	
+			min = min + time;
+		}
+		if(! inputQueue.isEmpty()) { 
+			curr = inputQueue.peek().getArrivalTime();
+			if (curr.compareTo(min) < 0) 
+				min = curr  ;
+		}
+		return min;
 	}
 	/**
 	 * Calculates the average time the customer waits to finish being attended 

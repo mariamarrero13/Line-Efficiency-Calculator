@@ -30,10 +30,10 @@ public class Main {
 				result.add(slms.process(clone(file),1)); 
 				result.add(slms.process(clone(file),3)); 
 				result.add(slms.process(clone(file),5)); 
-				result.add(mlms.process(clone(file),1)); 
-				result.add(mlms.process(clone(file),3)); 
-				result.add(mlms.process(clone(file),5)); 
-				
+//				result.add(mlms.process(clone(file),1)); 
+//				result.add(mlms.process(clone(file),3)); 
+//				result.add(mlms.process(clone(file),5)); 
+//				
 
 				generateOutputFile(result , fileNames.get(i));
 				result.clear();
