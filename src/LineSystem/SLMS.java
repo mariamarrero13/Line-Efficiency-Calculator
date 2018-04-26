@@ -9,7 +9,7 @@ import java.util.Queue;
 import Customer.Customer;
 import Server.Server;
 
-public class SLMS implements Line{	
+public class SLMS implements LineSystem{	
 	public String process(Queue<Customer> input, int numServers) {
 		Queue<Customer> inputQueue = input;
 		Deque<Customer> line = new ArrayDeque<>();
@@ -60,7 +60,6 @@ public class SLMS implements Line{
 			lastTime = time;
 			//time = serviceTime(time , busyServers, inputQueue);
 			time++;
-			System.out.println("Actual time: " +time);
 		}
 		//compute final statistics
 		return "SLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";

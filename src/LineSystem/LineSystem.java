@@ -5,7 +5,7 @@ import java.util.Queue;
 
 import Customer.Customer;
 
-public interface Line {
+public interface LineSystem {
 	
 	String process(Queue<Customer> input, int numServers);
 	/*

@@ -11,7 +11,9 @@ import java.util.Queue;
 
 import Customer.Customer;
 import DataReader.DataReader;
+import LineSystem.LineSystem;
 import LineSystem.MLMS;
+import LineSystem.MLMSBLL;
 import LineSystem.SLMS;
 
 public class Main {
@@ -24,17 +26,15 @@ public class Main {
 			int i=0;
 			for (Queue<Customer> file : dataFiles) {
 				result.add("Number of customers is: " + file.size());
-				SLMS slms = new SLMS();
-				MLMS mlms = new MLMS();
-
-				result.add(slms.process(clone(file),1)); 
-				result.add(slms.process(clone(file),3)); 
-				result.add(slms.process(clone(file),5)); 
-//				result.add(mlms.process(clone(file),1)); 
-//				result.add(mlms.process(clone(file),3)); 
-//				result.add(mlms.process(clone(file),5)); 
-//				
-
+				ArrayList<LineSystem> lineSystems = new ArrayList<>();
+				lineSystems.add(new SLMS());
+				lineSystems.add(new MLMS());
+				lineSystems.add(new MLMSBLL());
+				for (LineSystem ls : lineSystems) {
+					for (int j =1 ; j <6 ; j = j+2) {
+						result.add(ls.process(clone(file),j)); 
+					}
+				}
 				generateOutputFile(result , fileNames.get(i));
 				result.clear();
 				i++;
