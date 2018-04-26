@@ -43,6 +43,7 @@ public class Monitor {
 	}
 
 	public static void checkForTimeBalance (ArrayList<Deque<Customer>> lines) {
+		
 	}
 
 }
