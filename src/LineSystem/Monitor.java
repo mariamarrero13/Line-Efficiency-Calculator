@@ -18,15 +18,17 @@ public class Monitor {
 		double customersPerLine = numberOfCustomers/numberOfLines; // average number of customers per line to be balanced
 		if( customersPerLine % 1 == 0) {	// is integer 
 			for(Integer size : sizes) {
-				
+			
 			}
 		}
 	}
 	
 	public static void checkForTimeBalance (ArrayList<Deque<Customer>> lines) {
+		
 	}
 	
 	private static void balanceCust(ArrayList<Deque<Customer>> lines, double x) {
+		
 		
 	}
 	
