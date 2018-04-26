@@ -63,7 +63,7 @@ public class MLMSBLL extends MLMS {
 						iter.remove();
 						emptyServers.add(s); 
 					}
-					Monitor.checkForCustBalance(line);
+					Monitor.balanceCustomers(line);
 				}
 			}
 			time++;

@@ -8,7 +8,7 @@ import Customer.Customer;
 
 public class Monitor {
 
-	public static void checkForCustBalance (ArrayList<Deque<Customer>> lines) {
+	public static void balanceCustomers (ArrayList<Deque<Customer>> lines) {
 		int minIndex;
 		int maxIndex;
 		int min =0;
@@ -21,29 +21,40 @@ public class Monitor {
 			max = min;
 			minIndex = 0;
 			maxIndex = 0;
-			for (int i =0 ; i <lines.size() ; i++) {
-
-				int curr = lines.get(i).size();
+			for (Deque<Customer> line : lines) {
+				int curr = line.size();
 				if (curr< min) {
 					min = curr;
-					minIndex = i;
+					minIndex = lines.indexOf(line);
 				}
 				if (curr > max) {
 					max = curr;
-					maxIndex = i;
+					maxIndex = lines.indexOf(line);
 				}
 			}
 		} 
 		if((max-min) > 1) {
-			System.out.println("Before Min: " +lines.get(minIndex).size() + "Max: " +lines.get(maxIndex).size());
 			lines.get(minIndex).addLast((lines.get(maxIndex).pollLast()));
-			System.out.println("Min: " +min + "Max: " +max);
-			System.out.println("After Min: " +lines.get(minIndex).size() + "Max: " +lines.get(maxIndex).size());
 		}
 	}
 
-	public static void checkForTimeBalance (ArrayList<Deque<Customer>> lines) {
-		
+	public static int checkForFasterLine (ArrayList<Deque<Customer>> lines) {
+		int fasterIndex = 0;	  // The index of the line that has less waiting time
+		int lessWaitingTime = Integer.MAX_VALUE;  //The smaller waiting time of a line
+
+		for(Deque<Customer> line : lines ) {
+			int currTime = 0;		  //The waiting time of the actual line we are iterating over
+			for(Customer c : line) {
+				currTime = currTime + c.getRemainingTime();
+			}
+			if (currTime < lessWaitingTime) {
+				lessWaitingTime = currTime;
+				fasterIndex = lines.indexOf(line);
+				System.out.println(fasterIndex);
+			}
+		}
+		return fasterIndex;
+
 	}
 
 }

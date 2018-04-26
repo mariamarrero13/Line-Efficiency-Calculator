@@ -29,8 +29,8 @@ public class MLMSBWT extends MLMSBLL{
 
 			//Checks if a new customer arrives to the line and adds it
 			while(!inputQueue.isEmpty() && inputQueue.peek().getArrivalTime()==time) {
-				//calculate which line is emptier and deposit the customer in it
-				int min = findMin(line);
+				//calculate which line is faster and deposit the customer in it
+				int min = Monitor.checkForFasterLine(line);
 				line.get(min).add(inputQueue.remove());
 			}
 			//if there is a server available, assigns a new customer to it
@@ -63,12 +63,11 @@ public class MLMSBWT extends MLMSBLL{
 						iter.remove();
 						emptyServers.add(s); 
 					}
-					Monitor.checkForCustBalance(line);
 				}
 			}
 			time++;
 		}
 		//compute final statistics
-		return "MLMSBLL " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
+		return "MLMSBWT " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
 	}
 }

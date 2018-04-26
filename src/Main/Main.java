@@ -14,6 +14,7 @@ import DataReader.DataReader;
 import LineSystem.LineSystem;
 import LineSystem.MLMS;
 import LineSystem.MLMSBLL;
+import LineSystem.MLMSBWT;
 import LineSystem.SLMS;
 
 public class Main {
@@ -30,6 +31,7 @@ public class Main {
 				lineSystems.add(new SLMS());
 				lineSystems.add(new MLMS());
 				lineSystems.add(new MLMSBLL());
+				lineSystems.add(new MLMSBWT());
 				for (LineSystem ls : lineSystems) {
 					for (int j =1 ; j <6 ; j = j+2) {
 						result.add(ls.process(clone(file),j)); 
