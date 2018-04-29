@@ -68,6 +68,6 @@ public class MLMSBWT extends MLMSBLL{
 			time++;
 		}
 		//compute final statistics
-		return "MLMSBWT " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
+		return "MLMSBWT " + numServers + ": " + time +" "+averageTime(attendedCustomers) +" " +customerOverpassing(attendedCustomers);
 	}
 }

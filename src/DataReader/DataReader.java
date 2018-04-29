@@ -24,6 +24,7 @@ public class DataReader {
 		inputFile.close();
 		return fileContent; 
 	}
+	
 	public static ArrayList<Queue<Customer>> readData() throws FileNotFoundException {
 		ArrayList<String> fileNames = readFileNames();
 		ArrayList<Queue<Customer>> files = new ArrayList<Queue<Customer>>();

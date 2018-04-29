@@ -69,6 +69,6 @@ public class MLMSBLL extends MLMS {
 			time++;
 		}
 		//compute final statistics
-		return "MLMSBLL " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
+		return "MLMSBLL " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " " +customerOverpassing(attendedCustomers);
 	}
 }

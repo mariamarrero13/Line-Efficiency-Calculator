@@ -69,7 +69,7 @@ public class MLMS extends SLMS {
 			time++;
 		}
 		//compute final statistics
-		return "MLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
+		return "MLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " " +customerOverpassing(attendedCustomers);
 	}
 	/**
 	 * Finds the index of the line that has less customers
@@ -118,5 +118,21 @@ public class MLMS extends SLMS {
 			}
 		}
 		return false;
+	}
+	protected double customerOverpassing(ArrayList<Customer> attendedCustomers) {
+		int i = 0;
+		double m = 0;
+		while (i< attendedCustomers.size()) {
+			Customer c = attendedCustomers.get(i);
+			for(Customer g : attendedCustomers) {
+				if(c.getArrivalTime()<g.getArrivalTime() && c.getAttendingTime()>g.getAttendingTime()) {
+					m++;
+				}
+			}
+			i++;
+		}
+		m = m / (double) attendedCustomers.size();
+		return  Math.round(m * 100.0) / 100.0;
+		
 	}
 }

@@ -50,7 +50,6 @@ public class Monitor {
 			if (currTime < lessWaitingTime) {
 				lessWaitingTime = currTime;
 				fasterIndex = lines.indexOf(line);
-				System.out.println(fasterIndex);
 			}
 		}
 		return fasterIndex;
