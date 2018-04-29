@@ -24,7 +24,6 @@ public class SLMS implements LineSystem{
 			emptyServers.add(new Server(i+1));
 		}
 			
-		
 		while(!inputQueue.isEmpty()||!line.isEmpty()||!(attendingCustomers ==0)){
 			
 			//Checks if a new customer arrives to the line and adds it
@@ -76,7 +75,7 @@ public class SLMS implements LineSystem{
 			}	
 			min = min + time;
 		}
-		if(! inputQueue.isEmpty()) { 
+		if(!inputQueue.isEmpty()) { 
 			curr = inputQueue.peek().getArrivalTime();
 			if (curr.compareTo(min) < 0) 
 				min = curr  ;
