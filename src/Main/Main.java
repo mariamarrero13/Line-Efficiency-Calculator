@@ -22,7 +22,6 @@ public class Main {
 		ArrayList<Queue<Customer>> dataFiles = null;
 		ArrayList<String> fileNames = DataReader.readFileNames();
 		ArrayList<String> result = new ArrayList<String>() ;
-		try {
 			dataFiles = DataReader.readData();
 			int i=0;
 			for (Queue<Customer> file : dataFiles) {
@@ -41,9 +40,6 @@ public class Main {
 				result.clear();
 				i++;
 			}
-		} catch (FileNotFoundException e) {
-			// write to output file : Input file not found.
-		}
 
 	}
 	public static void generateOutputFile(ArrayList<String> result , String fileName) throws FileNotFoundException, UnsupportedEncodingException {
