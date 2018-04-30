@@ -51,6 +51,7 @@ public class MLMSBLL extends MLMS {
 					emptyServers.remove(s);
 					busyServers.add(s);
 					attendingCustomers++;
+					Monitor.balanceCustomers(line);
 				}
 				else {
 					i++;
@@ -70,7 +71,6 @@ public class MLMSBLL extends MLMS {
 						iter.remove();
 						emptyServers.add(s); 
 					}
-					Monitor.balanceCustomers(line);
 				}
 			}
 			time++;
