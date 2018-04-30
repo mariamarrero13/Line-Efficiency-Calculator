@@ -24,7 +24,7 @@ public class Server {
 		cust.isServed(1);
 	}
 	public void serve (int time) {
-		cust.isServed(1);
+		cust.isServed(time);
 	}
 
 }

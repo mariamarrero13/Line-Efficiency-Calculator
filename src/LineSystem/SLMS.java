@@ -24,7 +24,7 @@ public class SLMS implements LineSystem{
 			emptyServers.add(new Server(i+1));
 		}
 			
-		while(!inputQueue.isEmpty()||!line.isEmpty()||!(attendingCustomers ==0)){
+		while((!inputQueue.isEmpty()||!line.isEmpty()||!(attendingCustomers ==0))&& time >=0){
 			
 			//Checks if a new customer arrives to the line and adds it
 			while(!inputQueue.isEmpty() && inputQueue.peek().getArrivalTime()==time)
@@ -45,7 +45,9 @@ public class SLMS implements LineSystem{
 				//Give service to every customer being attended
 				while (iter.hasNext()) {
 					Server s = iter.next();
-					s.serve(time -lastTime +1);
+					s.serve(time -lastTime);
+					System.out.println("time" +time);
+					System.out.println("lastTime" +lastTime +"cust:" + s.getCustomer().getCustid());
 					Customer actualCustomer = s.getCustomer();
 					//Checks if server finished with customer 
 					if(actualCustomer.isServiceCompleted()) { 
@@ -57,30 +59,44 @@ public class SLMS implements LineSystem{
 				}
 			}
 			lastTime = time;
-			//time = serviceTime(time , busyServers, inputQueue);
-			time++;
+			time = serviceTime(time , busyServers, inputQueue);
+//			time++;
 		}
 		//compute final statistics
 		return "SLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
 	}
 	protected int serviceTime(int time, ArrayList<Server> busyServers, Queue<Customer> inputQueue) {
-		Integer curr= new Integer(0);
-		Integer min = time + 1;
-		if (busyServers.size()!=0) {
-			min = busyServers.get(0).getCustomer().getRemainingTime();
+		int curr= 0;
+		int min = 0;
+		if (inputQueue.isEmpty()) {
+			if(!busyServers.isEmpty()) {
+				for (Server s : busyServers) {
+					if(min == 0) 
+						min = s.getCustomer().getRemainingTime();
+					else
+						min = Math.min(min, s.getCustomer().getRemainingTime());
+
+				}
+				System.out.println("Min pelao : " + min);
+				System.out.println("Busy Servers : " + (min+time));
+				return min + time;
+			}
+			else {
+				min = time + 1;
+				System.out.println("Else busy: " + min);
+				return min;
+			}
+
+		}
+		else {
+			min = inputQueue.peek().getArrivalTime();
 			for (Server s : busyServers) {
-				curr = s.getCustomer().getRemainingTime();
-				if (curr.compareTo(min) < 0) 
-					min = curr;
-			}	
-			min = min + time;
+				min = Math.min(min, s.getCustomer().getRemainingTime()+time);
+			}
+			System.out.println(" inputQ : " + min);
+			return min;
+
 		}
-		if(!inputQueue.isEmpty()) { 
-			curr = inputQueue.peek().getArrivalTime();
-			if (curr.compareTo(min) < 0) 
-				min = curr  ;
-		}
-		return min;
 	}
 	/**
 	 * Calculates the average time the customer waits to finish being attended 

@@ -28,12 +28,13 @@ public class Main {
 				result.add("Number of customers is: " + file.size());
 				ArrayList<LineSystem> lineSystems = new ArrayList<>();
 				lineSystems.add(new SLMS());
-				lineSystems.add(new MLMS());
-				lineSystems.add(new MLMSBLL());
-				lineSystems.add(new MLMSBWT());
+//				lineSystems.add(new MLMS());
+//				lineSystems.add(new MLMSBLL());
+//				lineSystems.add(new MLMSBWT());
 				for (LineSystem ls : lineSystems) {
 					for (int j =1 ; j <6 ; j = j+2) {
 						result.add(ls.process(clone(file),j)); 
+						//System.out.println("______________________");
 					}
 				}
 				generateOutputFile(result , fileNames.get(i));
