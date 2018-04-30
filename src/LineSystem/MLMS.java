@@ -11,14 +11,23 @@ import Customer.Customer;
 import Server.Server;
 
 public class MLMS extends SLMS {
+	/**
+	 * Simulates the MLMS line system with the inputLine received
+	 * @param input : the inputLine used to simulate the system
+	 * @param numServers : the number of servers in the simulation
+	 * @return a string with the time that the system finished simulating, the average waiting time per customer and the
+	 * 			average number of customers overpassing
+	 */
 	public String process(Queue<Customer> input, int numServers) {
-		Queue<Customer> inputQueue = input;
-		ArrayList<Deque<Customer>> line = new ArrayList<Deque<Customer>>();
-		int attendingCustomers = 0 ; //number of customers being attended
+
+		Queue<Customer> inputQueue = input;									 //list of upcoming customers
+		ArrayList<Deque<Customer>> line = new ArrayList<Deque<Customer>>();	 //list of lines
+		int attendingCustomers = 0 ; 										 //number of customers being attended
 		ArrayList<Customer> attendedCustomers = new ArrayList<Customer>();	 //list of customers that servers finished attending
-		ArrayList<Server> busyServers = new ArrayList<Server>();	
+		ArrayList<Server> busyServers = new ArrayList<Server>();			 // list of servers with customers
 		ArrayList<Server> emptyServers = new ArrayList<Server>();			 //list of servers with no customers
 		int time = 0;
+
 		//initializes every server with an id from 1 to n
 		for(int i = 1 ; i< numServers + 1 ; i++) {
 			emptyServers.add(new Server(i));
@@ -95,9 +104,9 @@ public class MLMS extends SLMS {
 		return minIndex;
 	}
 	/**
-	 * Verifies if every queue in the arraylist is empty
+	 * Verifies if every queue in the arrayList is empty
 	 * @param line
-	 * @return
+	 * @return true if at least one line still has customers
 	 */
 	protected static boolean isEmpty(ArrayList<Deque<Customer>> line) {
 		for(Deque<Customer> dq : line) {
@@ -109,8 +118,8 @@ public class MLMS extends SLMS {
 	 * Verifies if a server is not attending a costumer but still has a line
 	 * @param emptyServers
 	 * @param line
-	 * @return
-	 */
+	 * @return true if at least one server follows this statement
+	 **/
 	protected boolean serverHasLine(ArrayList<Server> emptyServers, ArrayList<Deque<Customer>> line) {
 		for(Server s: emptyServers) {
 			if(!(line.get(s.getServerid()-1).isEmpty())){
@@ -119,6 +128,11 @@ public class MLMS extends SLMS {
 		}
 		return false;
 	}
+	/**
+	 * Calculates the average number of customers that reached the server before another customer who arrived earlier
+	 * @param attendedCustomers
+	 * @return a double number containing the average value.
+	 */
 	protected double customerOverpassing(ArrayList<Customer> attendedCustomers) {
 		int i = 0;
 		double m = 0;
@@ -133,6 +147,5 @@ public class MLMS extends SLMS {
 		}
 		m = m / (double) attendedCustomers.size();
 		return  Math.round(m * 100.0) / 100.0;
-		
 	}
 }

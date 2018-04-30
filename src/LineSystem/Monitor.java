@@ -7,7 +7,11 @@ import java.util.ListIterator;
 import Customer.Customer;
 
 public class Monitor {
-
+	/**
+	 * Verifies if the lines are balanced in length and balances them
+	 * It is assumed that just one customer needs to reaccomodate
+	 * @param lines the arrayList of lines to be balanced
+	 */
 	public static void balanceCustomers (ArrayList<Deque<Customer>> lines) {
 		int minIndex;
 		int maxIndex;
@@ -19,8 +23,8 @@ public class Monitor {
 		} else {
 			min = lines.get(0).size(); // first element as the current minimum
 			max = min;
-			minIndex = 0;
-			maxIndex = 0;
+			minIndex = 0;					// the index of the line with less customers
+			maxIndex = 0;					// the index of the line with more customers
 			for (Deque<Customer> line : lines) {
 				int curr = line.size();
 				if (curr< min) {
@@ -37,7 +41,11 @@ public class Monitor {
 			lines.get(minIndex).addLast((lines.get(maxIndex).pollLast()));
 		}
 	}
-
+	/**
+	 * Determines which is the faster line by calculating the average waiting time of each
+	 * @param lines
+	 * @return the index of the faster line
+	 */
 	public static int checkForFasterLine (ArrayList<Deque<Customer>> lines) {
 		int fasterIndex = 0;	  // The index of the line that has less waiting time
 		int lessWaitingTime = Integer.MAX_VALUE;  //The smaller waiting time of a line

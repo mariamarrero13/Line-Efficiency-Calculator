@@ -13,7 +13,11 @@ import java.util.Deque;
 import java.util.Queue;
 
 public class DataReader {
-
+/**
+ * Reads the names of the inputFiles to be read
+ * @return an arrayList with the names of the files
+ * @throws FileNotFoundException if the file does not exists
+ */
 	public static ArrayList<String> readFileNames() throws FileNotFoundException {
 		ArrayList<String> data = new ArrayList<String>();
 		String fileName = "dataFiles.txt"; 
@@ -24,7 +28,11 @@ public class DataReader {
 		inputFile.close();
 		return fileContent; 
 	}
-	
+	/**
+	 * Reads every file named in dataFiles.txt
+	 * @return an array list of queues
+	 * @throws FileNotFoundException id dataFiles.txt is not found
+	 */
 	public static ArrayList<Queue<Customer>> readData() throws FileNotFoundException {
 		ArrayList<String> fileNames = readFileNames();
 		ArrayList<Queue<Customer>> files = new ArrayList<Queue<Customer>>();

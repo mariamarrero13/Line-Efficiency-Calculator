@@ -10,6 +10,13 @@ import Customer.Customer;
 import Server.Server;
 
 public class SLMS implements LineSystem{	
+	/**
+	 * Simulates the MLMS line system with the inputLine received
+	 * @param input : the inputLine used to simulate the system
+	 * @param numServers : the number of servers in the simulation
+	 * @return a string with the time that the system finished simulating, the average waiting time per customer and the
+	 * 			average number of customers overpassing
+	 */
 	public String process(Queue<Customer> input, int numServers) {
 		Queue<Customer> inputQueue = input;
 		Deque<Customer> line = new ArrayDeque<>();
@@ -57,12 +64,18 @@ public class SLMS implements LineSystem{
 				}
 			}
 			lastTime = time;
-//		time = serviceTime(time , busyServers, inputQueue);
-			time++;
+			time = serviceTime(time , busyServers, inputQueue);
 		}
 		//compute final statistics
-		return "SLMS    " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
+		return "SLMS    " + numServers + ": " + ++time +" "+averageTime(attendedCustomers) + " 0";
 	}
+	/**
+	 * Calculates the next time an event is to happen
+	 * @param time the actual time
+	 * @param busyServers the array of servers attending customers
+	 * @param inputQueue the queue of customers that have not arrived yet
+	 * @return the next time an event is to happen
+	 */
 	protected int serviceTime(int time, ArrayList<Server> busyServers, Queue<Customer> inputQueue) {
 		int curr= 0;
 		int min = 0;
