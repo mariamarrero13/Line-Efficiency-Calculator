@@ -24,7 +24,10 @@ public class Server {
 		cust.isServed(1);
 	}
 	public void serve (int time) {
-		cust.isServed(time);
+		if(cust.getRemainingTime() < time)
+			cust.isServed(cust.getRemainingTime());
+		else
+			cust.isServed(time);
 	}
 
 }

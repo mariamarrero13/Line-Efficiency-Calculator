@@ -69,7 +69,7 @@ public class MLMS extends SLMS {
 			time++;
 		}
 		//compute final statistics
-		return "MLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " " +customerOverpassing(attendedCustomers);
+		return "MLMS    " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " " +customerOverpassing(attendedCustomers);
 	}
 	/**
 	 * Finds the index of the line that has less customers

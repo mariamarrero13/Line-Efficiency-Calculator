@@ -46,8 +46,6 @@ public class SLMS implements LineSystem{
 				while (iter.hasNext()) {
 					Server s = iter.next();
 					s.serve(time -lastTime);
-					System.out.println("time" +time);
-					System.out.println("lastTime" +lastTime +"cust:" + s.getCustomer().getCustid());
 					Customer actualCustomer = s.getCustomer();
 					//Checks if server finished with customer 
 					if(actualCustomer.isServiceCompleted()) { 
@@ -59,11 +57,11 @@ public class SLMS implements LineSystem{
 				}
 			}
 			lastTime = time;
-			time = serviceTime(time , busyServers, inputQueue);
-//			time++;
+//		time = serviceTime(time , busyServers, inputQueue);
+			time++;
 		}
 		//compute final statistics
-		return "SLMS " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
+		return "SLMS    " + numServers + ": " + time +" "+averageTime(attendedCustomers) + " 0";
 	}
 	protected int serviceTime(int time, ArrayList<Server> busyServers, Queue<Customer> inputQueue) {
 		int curr= 0;
@@ -77,13 +75,10 @@ public class SLMS implements LineSystem{
 						min = Math.min(min, s.getCustomer().getRemainingTime());
 
 				}
-				System.out.println("Min pelao : " + min);
-				System.out.println("Busy Servers : " + (min+time));
 				return min + time;
 			}
 			else {
 				min = time + 1;
-				System.out.println("Else busy: " + min);
 				return min;
 			}
 
@@ -93,7 +88,6 @@ public class SLMS implements LineSystem{
 			for (Server s : busyServers) {
 				min = Math.min(min, s.getCustomer().getRemainingTime()+time);
 			}
-			System.out.println(" inputQ : " + min);
 			return min;
 
 		}
