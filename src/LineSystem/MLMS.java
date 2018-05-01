@@ -9,7 +9,12 @@ import java.util.Queue;
 
 import Customer.Customer;
 import Server.Server;
-
+/**
+ * 
+ * @author Maria A Marrero ID 802154204 Sect 090
+ * @author Yamil J Gonzalez ID 802153112 Sect 090
+ *
+ */
 public class MLMS extends SLMS {
 	/**
 	 * Simulates the MLMS line system with the inputLine received

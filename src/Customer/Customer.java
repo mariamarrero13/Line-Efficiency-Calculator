@@ -1,4 +1,9 @@
 package Customer;
+/**
+ * 
+ * @author Maria A Marrero ID 802154204 Sect 090
+ *
+ */
 
 public class Customer {
 	private int custid;         // id of this customer

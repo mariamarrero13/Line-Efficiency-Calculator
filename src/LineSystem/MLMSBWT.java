@@ -8,7 +8,11 @@ import java.util.Queue;
 
 import Customer.Customer;
 import Server.Server;
-
+/**
+ * 
+ * @author Yamil J Gonzalez ID 802153112 Sect 090
+ *
+ */
 public class MLMSBWT extends MLMSBLL{
 	/**
 	 * Simulates the MLMS line system with the inputLine received

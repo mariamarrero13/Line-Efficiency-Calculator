@@ -1,7 +1,11 @@
 package Server;
 
 import Customer.Customer;
-
+/**
+ * 
+ * @author Yamil J Gonzalez ID 802153112 Sect 090
+ *
+ */
 public class Server {
 	private int sid; // id of server
 	private Customer cust; // customer server is currently attending

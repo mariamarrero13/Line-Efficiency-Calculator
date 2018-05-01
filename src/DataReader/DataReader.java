@@ -3,14 +3,17 @@ package DataReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import Customer.Customer;
-import java.util.Deque;
 import java.util.Queue;
+/**
+ * 
+ * @author Maria A Marrero ID 802154204 Sect 090
+ *
+ */
 
 public class DataReader {
 /**

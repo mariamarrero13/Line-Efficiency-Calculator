@@ -5,7 +5,11 @@ import java.util.Deque;
 import java.util.ListIterator;
 
 import Customer.Customer;
-
+/**
+ * 
+ * @author Maria A Marrero ID 802154204 Sect 090
+ *
+ */
 public class Monitor {
 	/**
 	 * Verifies if the lines are balanced in length and balances them
