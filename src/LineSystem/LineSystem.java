@@ -1,6 +1,5 @@
 package LineSystem;
 
-import java.util.ArrayList;
 import java.util.Queue;
 
 import Customer.Customer;

@@ -82,7 +82,6 @@ public class SLMS implements LineSystem{
 	 * @return the next time an event is to happen
 	 */
 	protected int serviceTime(int time, ArrayList<Server> busyServers, Queue<Customer> inputQueue) {
-		int curr= 0;
 		int min = 0;
 		if (inputQueue.isEmpty()) {
 			if(!busyServers.isEmpty()) {

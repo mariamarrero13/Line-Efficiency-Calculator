@@ -2,7 +2,6 @@ package LineSystem;
 
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.ListIterator;
 
 import Customer.Customer;
 /**
