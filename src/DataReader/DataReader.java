@@ -22,7 +22,6 @@ public class DataReader {
  * @throws FileNotFoundException if the file does not exists
  */
 	public static ArrayList<String> readFileNames() throws FileNotFoundException {
-		ArrayList<String> data = new ArrayList<String>();
 		String fileName = "dataFiles.txt"; 
 		Scanner inputFile = new Scanner(new File("inputFiles",fileName)); 
 		ArrayList<String> fileContent = new ArrayList<>(); 
